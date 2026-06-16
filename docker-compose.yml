@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15  # بهتر است نسخه مشخص باشد
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ehsan -d mydb"]
+      interval: 5s  # 1s خیلی کم است
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_USER: ehsan
+      POSTGRES_PASSWORD: 1234  # فاصله نباید داشته باشد
+      POSTGRES_DB: mydb        # فاصله نباید داشته باشد
+    ports:
+      - "5432:5432"  # بهتر است با کوتیشن
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # برای persisting data
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy  
+  
+  # frontend:
+  #   build: ./Frontend
+  #   dockerfile: Dockerfile
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   depends_on:
+  #     backend:
+  #       condition: service_healthy
+
+volumes:
+  postgres_data:
