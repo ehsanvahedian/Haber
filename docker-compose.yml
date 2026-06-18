@@ -21,11 +21,13 @@ services:
       context: ./Backend
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - "8000:8000"
     depends_on:
       db:
-        condition: service_healthy  
-  
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://ehsan:1234@db:5432/mydb
+      
   # frontend:
   #   build: ./Frontend
   #   dockerfile: Dockerfile

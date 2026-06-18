@@ -1,14 +1,18 @@
 FROM python:3.14-slim
 
-WORKDIR /app
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-RUN pip install --upgrade pip 
-RUN pip install --no-cache-dir psycopg2-binary sqlalchemy alembic "fastapi[standard]"
+WORKDIR /app/Backend
 
+# کپی فایل‌های پروژه
+COPY pyproject.toml .
 COPY . .
 
+# نصب وابستگی‌ها
+RUN uv sync
+
+# کپی و تنظیم entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-

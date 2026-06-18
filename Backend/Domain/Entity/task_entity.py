@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from datetime import datetime
+
 @dataclass
 class task_entity():
     id: int
     task_txt: str
     description: str
     created_at: datetime
-    expired_at: datetime
+    due_time: datetime
     completed: bool
     priority: int
 
@@ -17,7 +18,7 @@ class task_entity():
         self.priority = priority
 
     def change_expiration(self, date: datetime):
-        self.expired_at = date
+        self.due_time = date
 
     def change_task_txt(self, text: str):
         self.task_txt = text

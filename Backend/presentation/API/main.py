@@ -1,24 +1,24 @@
 from fastapi import FastAPI, Depends
-from Infrastructure.DB.hello_repo_impl import hello_repo_impl
 from Shared.database import get_session
 from typing import Annotated
-from Domain.value_objects.hello import hello
-HRP = hello_repo_impl(get_session())
+from Infrastructure.DB.repo_implement.task_repo_impl import task_repo_impl
+from Domain.Entity.task_entity import task_entity
 app = FastAPI()
+
+taskRepoImpl = task_repo_impl(get_session())
 
 
 @app.get("/")
 async def root():
     return("HEllo welcome !!")
 
-@app.get("/hello")
-async def get_hello():
-    return HRP.get_hello()
+@app.get("/task")
+async def get_tasks():
+    return taskRepoImpl.list_by_status()
 
-@app.post("/hello")
-async def set_hello(data: Annotated[hello, Depends(hello)]):
-    print(data)
-    return HRP.set_hello(data=data)
+@app.post("/task")
+async def add_task(data: Annotated[task_entity, Depends(task_entity)]):
+    return taskRepoImpl.add_task(data)
 
 if __name__ == "__main__":
     import uvicorn

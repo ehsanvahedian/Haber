@@ -1,15 +1,34 @@
 #!/bin/bash
+cd /app/Backend
 
+# نصب وابستگی‌ها
+uv sync
 
-# Run DB migrations
-alembic init
+# بررسی وجود دایرکتوری alembic
+if [ ! -d "alembic" ]; then
+    echo "Initializing alembic..."
+    uv run alembic init alembic
+fi
 
-mv alembic.example.ini alembic.ini
-mv alembic.env.example.py alembic/env.py
+# کپی فایل‌های نمونه اگر وجود دارند
+if [ -f "alembic.example.ini" ]; then
+    mv alembic.example.ini ./alembic.ini
+fi
 
-alembic revision --autogenerate -m "Tables added"
+if [ -f "alembic.env.example.py" ]; then
+    mv alembic.env.example.py ./alembic/env.py
+fi
 
-alembic upgrade head
+# ایجاد migration اگر فایل alembic.ini وجود دارد
+if [ -f "alembic.ini" ]; then
+    echo "Creating migration..."
+    uv run alembic revision --autogenerate -m "Tables added" || echo "No changes detected"
+    echo "Running migrations..."
+    uv run alembic upgrade head
+else
+    echo "alembic.ini not found, skipping migrations"
+fi
 
-# Start application
+# اجرای برنامه
+echo "Starting application..."
 uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
