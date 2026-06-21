@@ -9,14 +9,21 @@ class task_repository(ABC):
     def update_task(self, task_data: task_entity): ...
 
     @abstractmethod
-    def delete_task(self, task_data: task_entity): ...
+    def delete_task(self, id: int): ...
 
     @abstractmethod
     def list_by_status(self): ...
 
-    def biuld_task(self, task_data):
-        return task_entity(**task_data.__dict__)
+    @abstractmethod
+    def get_task(self, id: int) -> task_entity: ...
 
+    def build_task(self, task_data) -> task_entity:
+        try:
+            return task_entity(**task_data.__dict__)
+        except Exception as e:
+            return {"status": "failure", "message": str(e)}   
+
+    
     #You can add list by date
     
     #You can add list by priority

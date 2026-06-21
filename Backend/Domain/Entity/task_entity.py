@@ -1,15 +1,15 @@
 from dataclasses import dataclass
 from datetime import datetime
-
+from typing import Optional, Union
 @dataclass
 class task_entity():
-    id: int
+    id: Union[int | None]
     task_txt: str
-    description: str
+    description: Union[str]
     created_at: datetime
-    due_time: datetime
+    due_time: Union[datetime]
     completed: bool
-    priority: int
+    priority: int = 1
 
     def mark_complete(self):
         self.completed = True
