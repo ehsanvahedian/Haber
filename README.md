@@ -1,4 +1,4 @@
-```markdown
+
 <div align="center">
 
 <img src="docs/images/banner.png" alt="Personal Planner Banner" width="100%">
@@ -87,7 +87,7 @@ Current modules include task management and financial transaction management, wh
 
 # Project Structure
 
-```
+
 
 Personal_Planner/
 
