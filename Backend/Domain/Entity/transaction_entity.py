@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime
 from Domain.value_objects.Money import Money
 from enum import Enum
@@ -18,6 +18,7 @@ class transaction_entity:
     description: str
     id: int | None = field(default=None)
 
-    
+    def replace_items(self, updated_data):
+        return replace(self, **updated_data)
 
 

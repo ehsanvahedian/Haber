@@ -34,16 +34,16 @@ class transaction_pydantic(BaseModel):
     id: int
 
     amount: int
-
+    
     currency: str
 
-    type: TransactionType
+    type: Union[TransactionType | None] = None
 
     title: Union[str | None] = None
 
     source: Union[str | None] = None
 
-    date: datetime = None
+    date: Union[datetime | None] = None
 
     description: Union[str | None] = None
 

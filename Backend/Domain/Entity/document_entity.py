@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime
 
 @dataclass
@@ -10,5 +10,5 @@ class document_entity:
     updated_at: datetime
     id: int | None = field(default=None)
     
-    def update_date(self, date: datetime):
-        self.updated_at = date
+    def replace_items(self, updated_data):
+        return replace(self, **updated_data)

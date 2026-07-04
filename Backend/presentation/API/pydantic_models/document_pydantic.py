@@ -5,13 +5,13 @@ from datetime import datetime
 class document_pydantic(BaseModel):
     id: int
     
-    name: str
+    name: Union[str | None] = None
 
     topic: Union[str | None] = None
 
     content: Union[str | None] = None
 
-    created_at: datetime
+    created_at: Union[datetime | None] = None
     
     updated_at: Union[datetime | None] = None
 

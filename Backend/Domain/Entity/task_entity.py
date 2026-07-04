@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime
 from typing import Optional, Union
 @dataclass
@@ -16,15 +16,5 @@ class task_entity():
     def mark_complete(self):
         self.completed = True
     
-    def change_priority(self, priority: int):
-        self.priority = priority
-
-    def change_expiration(self, date: datetime):
-        self.due_time = date
-
-    def change_task_txt(self, text: str):
-        self.task_txt = text
-
-    def change_description(self, text: str):
-        self.description = text  
-    
+    def replace_items(self, updated_data):
+        return replace(self, **updated_data)

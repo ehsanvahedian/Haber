@@ -1,4 +1,5 @@
 from Infrastructure.DB.repo_implement.transaction_repo_impl import transaction_repo_impl
+from Domain.value_objects.Money import Money
 from Shared.database import get_session
 
 
@@ -12,8 +13,11 @@ class transactionUseCases:
         return self.implement.add_transaction(transaction)
 
     def updateTransactionUseCase(self, data):
-        transaction = self.implement.build_transaction(data)
-        return self.implement.update_transaction(transaction)
+        current_data = self.implement.get_transaction(data.id).to_entity()
+        updated_data = {k: v for k, v in data.__dict__.items() if v is not None}
+        updated_data = current_data.replace_items(updated_data)
+
+        return self.implement.update_transaction(updated_data)
 
     def deleteTransactionUseCase(self, id):
         return self.implement.delete_transaction(id)

@@ -1,7 +1,7 @@
 from .Base import Base
 from sqlalchemy.orm import mapped_column, Mapped
 from datetime import datetime
-
+from Domain.Entity.document_entity import document_entity
 class document_ORM(Base):
     __tablename__ = "documents"
 
@@ -11,3 +11,14 @@ class document_ORM(Base):
     content: Mapped[str] = mapped_column(nullable=True)
     created_at: Mapped[datetime]
     updated_at: Mapped[datetime] = mapped_column(nullable=True)
+
+
+    def to_entity(self) -> document_entity:
+        return document_entity(
+            name=self.name,
+            topic=self.topic,
+            content=self.content,
+            created_at=self.created_at,
+            updated_at=self.updated_at,
+            id=self.id
+        )

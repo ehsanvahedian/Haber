@@ -3,6 +3,7 @@ from .Base import Base
 from sqlalchemy.orm import mapped_column, Mapped
 from datetime import datetime
 from enum import Enum
+from Domain.Entity.transaction_entity import transaction_entity
 from Domain.value_objects.Money import Money
 from Domain.value_objects.transaction_type import TransactionType
 
@@ -40,3 +41,13 @@ class transaction_ORM(Base):
     date: Mapped[datetime]
     description: Mapped[str] = mapped_column(nullable=True)
 
+    def to_entity(self) -> transaction_entity:
+        return transaction_entity(
+            title=self.title,
+            amount=self.amount,
+            type=self.type,
+            source=self.source,
+            date=self.date,
+            description=self.description,
+            id=self.id
+        )
