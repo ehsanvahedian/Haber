@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Body
 
 from Application.UseCases.transactionUseCases import transactionUseCases
-from ..pydantic_models.transaction_pydantic import transaction_pydantic, transaction_pydantic_input
+from ...pydantic_models.transaction_pydantic import transaction_pydantic, transaction_pydantic_input
 from typing import Annotated
 
 router = APIRouter(

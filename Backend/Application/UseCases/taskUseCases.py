@@ -15,7 +15,7 @@ class taskUseCases:
         return self.implement.add_task(task)
 
 
-    def updateTask(self, data):
+    def updateTaskUseCase(self, data):
         current_data = self.implement.get_task(data.id).to_entity()
         updated_data = {k: v for k, v in data.__dict__.items() if v is not None}
         updated_data = current_data.replace_items(updated_data)
@@ -23,7 +23,7 @@ class taskUseCases:
         return self.implement.update_task(updated_data)
 
 
-    def deleteTask(self, id: int):
+    def deleteTaskUseCase(self, id: int):
         return self.implement.delete_task(id)
 
 

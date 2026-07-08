@@ -1,21 +1,16 @@
-import click
-from ..API.pydantic_models.transaction_pydantic import transaction_pydantic
+import typer
+from .commands.task_commands import task_app
 
-# class transaction_pydantic(BaseModel):
-#     title: str
 
-#     amount: money_pydantic
 
-#     type: TransactionType
+typerapp = typer.Typer()
 
-#     source: Union[str | None] = None
 
-#     date: datetime = Field(
-#         default_factory=datetime.now
-#     )
+@typerapp.callback(invoke_without_command=True)
+def main(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        print(ctx.get_help())
+        raise typer.Exit()
 
-#     description: Union[str | None] = None
 
-# @click.command()
-# @click.argument()
-# def add_expense():
+typerapp.add_typer(task_app, name="task")

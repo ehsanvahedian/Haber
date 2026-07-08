@@ -2,7 +2,7 @@ from fastapi.routing import APIRouter
 from fastapi import Depends
 
 from Application.UseCases.taskUseCases import taskUseCases
-from ..pydantic_models.task_pydanic import task_pydantic, task_pydantic_input
+from ...pydantic_models.task_pydanic import task_pydantic, task_pydantic_input
 from typing import Annotated
 
 router = APIRouter(
@@ -22,11 +22,11 @@ async def get_tasks(data: Annotated[task_pydantic_input, Depends(task_pydantic_i
 
 @router.put("/update")
 async def update_task(data: Annotated[task_pydantic, Depends(task_pydantic)]):
-    return TUC.updateTask(data)
+    return TUC.updateTaskUseCase(data)
 
 @router.delete("/delete/{id}")
 async def delete_task(id: int):
-    return TUC.deleteTask(id)
+    return TUC.deleteTaskUseCase(id)
 
 @router.put("/complete/{id}")
 async def mark_complete(id: int):

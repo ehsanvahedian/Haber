@@ -2,7 +2,7 @@ from fastapi.routing import APIRouter
 from fastapi import Depends
 
 from Application.UseCases.documentUseCases import documentUseCases
-from ..pydantic_models.document_pydantic import document_pydantic, document_pydantic_input
+from ...pydantic_models.document_pydantic import document_pydantic, document_pydantic_input
 from typing import Annotated
 
 
