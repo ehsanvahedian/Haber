@@ -1,3 +1,0 @@
-[console_scripts]
-pfc-cli = presentation.main:cli_app
-pfc-run-fastapi = presentation.main:fastapi_app

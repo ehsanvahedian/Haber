@@ -1,0 +1,3 @@
+[console_scripts]
+haber-cli = presentation.main:cli_app
+haber-run-fastapi = presentation.main:fastapi_app

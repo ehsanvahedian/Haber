@@ -1,7 +1,7 @@
 
 <div align="center">
 
-<img src="docs/images/banner.png" alt="Personal Planner Banner" width="100%">
+<img src="docs/images/Banner.png" alt="Personal Planner Banner" width="100%">
 
 # Personal Planner
 
@@ -12,6 +12,7 @@ Personal Planner is an extensible productivity platform designed around <strong>
 </p>
 
 <p>
+
 <img src="https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white">
 <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white">
 <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white">
@@ -39,12 +40,15 @@ Current modules include task management and financial transaction management, wh
 
 # Features
 
+-You can control your tasks
+-You can audit your transaction
+-You can write documents
+
 ## Current
 
 - Domain-Driven Design (DDD)
 - Clean Architecture
 - Repository Pattern
-- Value Objects
 - Task Management
 - Transaction Management
 - PostgreSQL Support
@@ -60,22 +64,22 @@ Current modules include task management and financial transaction management, wh
 
 ## Dashboard
 
-<img src="docs/images/dashboard.png">
+<img src="docs/images/APIs.png">
 
 ---
 
-## Architecture
+<!-- ## Architecture
 
 <img src="docs/images/architecture.png">
 
----
+--- -->
 
 # Technology Stack
 
 | Layer | Technology |
 |--------|------------|
 | Language | Python |
-| Database | PostgreSQL |
+| Database | PostgreSQL AND SQLite|
 | ORM | SQLAlchemy |
 | Migration | Alembic |
 | Container | Docker |
@@ -85,71 +89,41 @@ Current modules include task management and financial transaction management, wh
 
 ---
 
-# Project Structure
-
-
-
-Personal_Planner/
-
-├── Domain/
-│   ├── Entities
-│   ├── ValueObjects
-│   ├── Repositories
-│   └── Services
-│
-├── Application/
-│   ├── Commands
-│   ├── Queries
-│   ├── DTOs
-│   └── UseCases
-│
-├── Infrastructure/
-│   ├── Database
-│   ├── ORM
-│   ├── Repository
-│   └── Configuration
-│
-├── Presentation/
-│
-├── migrations/
-│
-├── docker/
-│
-└── main.py
-
-````
-
----
-
-# Why Domain Driven Design?
-
-The project is intentionally designed around Domain-Driven Design because business rules should remain independent from frameworks and infrastructure.
-
-This architecture provides:
-
-- Better maintainability
-- Easier testing
-- Clear separation of concerns
-- High scalability
-- Replaceable infrastructure
-- Framework independence
-
----
-
 # Getting Started
 
-Clone the repository
+### -First, Clone the repository
+
+```bash git clone https://github.com/ehsanvahedian/Haber.git ```
+
+
+### enter to file
+
 
 ```bash
-git clone https://github.com/ehsanvahedian/personal_planner_app.git
+cd Haber
+```
+### Automatic installation
 
-cd personal_planner_app
-````
+#### run bash file
+```bash
+bash init.sh #if you have not UV installed
+bash init.uv.sh #if you have UV installed
+```
+### manual installation
+
+#### For UV:
+```bash
+uv sync # In src directory
+uv run main.py # In src
+
+## Help panel will appear.
+```
+
+#### without UV
 
 Create virtual environment
-
 ```bash
-python -m venv .venv
+python -m venv .venv # In src directory
 ```
 
 Activate environment
@@ -161,11 +135,16 @@ source .venv/bin/activate
 Install dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install . # In src directory
 ```
 
----
+run main.py file
 
+```bash
+python main.py
+```
+---
+<!-- 
 # Docker
 
 Run the complete development environment
@@ -180,23 +159,10 @@ Stop containers
 docker compose down
 ```
 
----
+--- -->
 
-# Database Migration
 
-Create migration
 
-```bash
-alembic revision --autogenerate -m "Initial"
-```
-
-Run migrations
-
-```bash
-alembic upgrade head
-```
-
----
 
 # Future Vision
 
@@ -205,19 +171,11 @@ Personal Planner is being developed as a complete productivity ecosystem.
 The roadmap currently includes:
 
 * React Frontend Adapter
-* Interactive CLI Application
-* Project Package Manager
-* Plugin System
 * Authentication
 * Notification Center
 * Calendar Integration
 * Scheduler
-* Configuration Wizard
 * Multiple Database Providers
-* SQLite Support
-* Redis Support
-* REST API
-* GraphQL API
 * AI Assistant
 * Cloud Synchronization
 * Desktop Application
@@ -226,36 +184,6 @@ The roadmap currently includes:
 * Backup & Restore
 * Import / Export
 * Dashboard Analytics
-
----
-
-# Planned CLI
-
-```bash
-planner init
-
-planner setup
-
-planner doctor
-
-planner task add
-
-planner task list
-
-planner task complete
-
-planner finance add
-
-planner finance report
-
-planner config
-
-planner migrate
-
-planner plugin install
-
-planner update
-```
 
 ---
 
@@ -275,42 +203,6 @@ Planned technologies include:
 
 ---
 
-# Planned Package Manager
-
-One of the primary goals of this project is creating a package manager capable of configuring the project automatically after cloning.
-
-Example commands:
-
-```bash
-planner create
-
-planner install
-
-planner configure
-
-planner add postgres
-
-planner add sqlite
-
-planner add react
-
-planner add redis
-
-planner add auth
-
-planner add docker
-
-planner add nginx
-
-planner plugin search
-
-planner plugin install
-```
-
-This installer will allow developers to customize their project without manually editing configuration files.
-
----
-
 # Roadmap
 
 * [x] Project Foundation
@@ -319,12 +211,9 @@ This installer will allow developers to customize their project without manually
 * [x] Docker Environment
 * [x] PostgreSQL Integration
 * [x] Alembic Support
-* [ ] Interactive CLI
+* [x] Interactive CLI
+* [x] Package Manager
 * [ ] React Frontend
-* [ ] Package Manager
-* [ ] Plugin Marketplace
-* [ ] REST API
-* [ ] GraphQL
 * [ ] Authentication
 * [ ] AI Integration
 * [ ] Cloud Sync
