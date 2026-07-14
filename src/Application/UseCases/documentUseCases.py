@@ -11,7 +11,7 @@ class documentUseCases:
         return self.implement.add_document(document)
 
     def updateDocumentUseCase(self, data):
-        current_data = self.implement.get_document(data.id).to_entity()
+        current_data = self.implement.get_document(data.id)
         updated_data = {k: v for k, v in data.__dict__.items() if v is not None}
         updated_data = current_data.replace_items(updated_data)
 

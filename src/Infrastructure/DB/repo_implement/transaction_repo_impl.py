@@ -74,11 +74,8 @@ class transaction_repo_impl(transaction_repository):
 
     def get_transaction(self, id):
         try:
-            return (
-                self.session.query(transaction_ORM)
-                .filter(transaction_ORM.id == id)
-                .first()
-            )
+            transaction: transaction_ORM =self.session.query(transaction_ORM).filter(transaction_ORM.id == id).first()
+            return transaction.to_entity()
 
         except Exception as e:
             return {

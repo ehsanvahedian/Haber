@@ -5,4 +5,4 @@ echo "virtual Environment created"
 .venv/*/pip install .
 echo "dependencies installed"
 echo "running main.py ..."
-.venv/*/python main.py
+.venv/*/python ../main.py

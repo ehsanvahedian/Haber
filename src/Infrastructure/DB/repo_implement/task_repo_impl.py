@@ -74,13 +74,10 @@ class task_repo_impl(task_repository):
                 "message": str(e)
             }
 
-    def get_task(self, id) -> task_ORM | None:
+    def get_task(self, id):
         try:
-            return (
-                self.session.query(task_ORM)
-                .filter(task_ORM.id == id)
-                .first()
-            )
+            task : task_ORM = self.session.query(task_ORM).filter(task_ORM.id == id).first()
+            return task.to_entity()
 
         except Exception as e:
             return {

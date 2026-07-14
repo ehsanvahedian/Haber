@@ -2,6 +2,7 @@ import typer
 from datetime import datetime
 from typing import Annotated
 from prompt_toolkit.shortcuts import PromptSession
+from prompt_toolkit.key_binding import KeyBindings
 
 
 from Application.UseCases.documentUseCases import documentUseCases
@@ -18,7 +19,17 @@ def main(ctx: typer.Context):
     if ctx.invoked_subcommand is None:
         print(ctx.get_help())
         raise typer.Exit()
-    
+
+#___editors_Keys___
+kb = KeyBindings()
+
+@kb.add("c-q")
+def _(event):
+    event.app.exit()
+
+@kb.add("c-s")
+def _(event):
+    event.app.exit(result=event.app.current_buffer.text)
 
 @document_app.command()
 def add(
@@ -27,7 +38,9 @@ def add(
     ):
     """argument: title topic(optional)"""
     try:
-        promptsession = PromptSession(multiline=True)
+        print("ctrl+S to save new content|ctrl+Q to discard changes.")
+        print("Go ahead:")
+        promptsession = PromptSession(multiline=True, key_bindings=kb)
 
         print("Enter your text: \n")
         content = promptsession.prompt()
@@ -55,15 +68,18 @@ def edit(
         if not doc:
             print("No document with this id")
             return
+        print("ctrl+S to save new content|ctrl+Q to discard changes.")
+        print("Go ahead:")
+        promptsession = PromptSession(multiline=True, key_bindings=kb)
         
-        promptsession = PromptSession(multiline=True)
-        
-        content = promptsession.prompt(doc.content, )
+        content = promptsession.prompt(
+            message="> ",
+            default=doc.content,
+        )
 
-        doc.replace_items({"content": content, "updated_at": datetime.now()})
+        new_data = {"content": content, "updated_at": datetime.now()}
 
-        DUC.updateDocumentUseCase(doc)
-
+        DUC.updateDocumentUseCase(doc.replace_items(new_data))
         print("You've just edited the document")
   
 

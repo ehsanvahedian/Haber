@@ -1,5 +1,5 @@
 [project]
-name = "backend"
+name = "Haber_App"
 version = "0.1.0"
 description = "The backend of app"
 readme = "README.md"
