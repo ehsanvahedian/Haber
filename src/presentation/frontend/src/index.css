@@ -2,7 +2,8 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: radial-gradient(circle,rgba(10, 132, 255, 0.16) 0%, rgba(184, 219, 255, 0.09) 25%, rgba(255, 255, 255, 1) 77%);;
+  --bg: rgb(255, 255, 255);
+  --bg-grad: radial-gradient(circle,rgba(10, 132, 255, 0.16) 0%, rgba(184, 219, 255, 0.09) 25%, rgba(255, 255, 255, 1) 77%);
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
@@ -35,7 +36,8 @@
   :root {
     --text: #e7ecf5;
     --text-h: #f3f4f6;
-    --bg: radial-gradient(circle,rgba(10, 132, 255, 0.16) 0%, rgba(11, 11, 12, 0.2) 25%, rgba(11, 11, 12, 1) 77%);;
+    --bg: rgba(11, 11, 12, 1) 77%;
+    --bg-grad: radial-gradient(circle,rgba(10, 132, 255, 0.41) 0%, rgba(11, 11, 12, 0.672) 25%, rgba(11, 11, 12, 1) 77%);
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -65,6 +67,9 @@ body {
   margin: 0;
 }
 
+.bg-grad {
+  background-image: var(--bg-grad);
+}
 h1,
 h2 {
   font-family: var(--heading);
@@ -101,5 +106,9 @@ p {
 .text{
   color: var(--text);
   font-weight: lighter;
+}
+.text_menu{
+  color: var(--text);
+  font-weight: light;
 }
 
